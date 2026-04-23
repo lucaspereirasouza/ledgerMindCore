@@ -1,0 +1,11 @@
+services:
+  ledgermind:
+    build: .
+    container_name: ledgermind-app
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    restart: always
