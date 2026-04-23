@@ -6,17 +6,14 @@ from dotenv import load_dotenv
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 
-# Load environment variables
 load_dotenv()
 
-# Page configuration
 st.set_page_config(
     page_title="LedgerMind AI - Financial Agent",
     page_icon="🤖",
     layout="wide"
 )
 
-# Custom CSS for Premium Look
 st.markdown("""
     <style>
     .main {
@@ -34,7 +31,6 @@ st.markdown("""
     </style>
     """, unsafe_allow_headers=True)
 
-# Data Loading Functions
 @st.cache_data
 def load_data():
     transactions = pd.read_csv("data/transacoes.csv")
@@ -47,7 +43,6 @@ def load_data():
 
 transactions, history, profile, products = load_data()
 
-# Sidebar - Dashboard Lite
 with st.sidebar:
     st.title("📊 LedgerMind Dashboard")
     st.markdown("---")
@@ -61,9 +56,8 @@ with st.sidebar:
     total_spent = transactions['valor'].sum()
     st.metric("Total Transactions", f"R$ {total_spent:,.2f}")
 
-# AI Agent Logic
 def get_agent():
-    # Context summary for the agent
+
     context = f"""
     Client Profile: {json.dumps(profile)}
     Available Products: {json.dumps(products)}
@@ -87,7 +81,6 @@ def get_agent():
         markdown=True
     )
 
-# Chat Interface
 st.title("🤖 LedgerMind Conversational Agent")
 st.caption("How can I help you with your financial planning today?")
 
